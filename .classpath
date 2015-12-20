@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="vending-machine-app"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/BeanShell"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/cglib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hamcrest"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jMock"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JUnit"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Objenesis"/>
+	<classpathentry kind="src" path="/vendingMachine"/>
+	<classpathentry kind="output" path="bin/com/pillartechnology/vendingMachine"/>
+</classpath>
