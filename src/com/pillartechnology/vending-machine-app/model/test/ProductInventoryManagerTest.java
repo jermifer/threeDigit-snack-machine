@@ -15,7 +15,7 @@ import com.pillartechnology.vendingMachine.model.productInventory.ProductInvento
 
 import model.productInventory.ProductInventoryManager;
 
-public class VendingMachineInventoryManagerTest {
+public class ProductInventoryManagerTest {
 	@Rule public JUnitRuleMockery context = new JUnitRuleMockery();
 	
 	private ProductInventoryCollection<ProductCode, ProductInventoryItem> products;
@@ -31,7 +31,7 @@ public class VendingMachineInventoryManagerTest {
 
 	@Test
 	public final void testFindProduct() {
-		final ProductCode productCode = ProductCode.CODE111;
+		final ProductCode productCode = context.mock(ProductCode.class);
 		
 		context.checking(new Expectations() {
 			{
