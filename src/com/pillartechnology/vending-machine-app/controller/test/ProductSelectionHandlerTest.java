@@ -1,7 +1,5 @@
 package controller.test;
 
-import static org.junit.Assert.*;
-
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
@@ -13,8 +11,6 @@ import controller.productSelection.ProductSelectionHandler;
 import com.pillartechnology.vendingMachine.controller.productSelection.ProductSelectionLibrary;
 import com.pillartechnology.vendingMachine.controller.productSelection.ProductSelectionManager;
 import com.pillartechnology.vendingMachine.model.funds.FundsService;
-import com.pillartechnology.vendingMachine.model.vendingMachineInventory.VendingMachineInventoryManager;
-import com.pillartechnology.vendingMachine.model.vendingMachineInventory.VendingMachineInventoryItem;
 import com.pillartechnology.vendingMachine.view.VendingMachineDisplay;
 
 

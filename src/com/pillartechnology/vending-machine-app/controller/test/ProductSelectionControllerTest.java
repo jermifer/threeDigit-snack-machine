@@ -9,8 +9,9 @@ import controller.productSelection.ProductSelectionController;
 import com.pillartechnology.vendingMachine.controller.productSelection.ProductSelectionHandler;
 import com.pillartechnology.vendingMachine.controller.productSelection.ProductSelectionLibrary;
 import com.pillartechnology.vendingMachine.model.funds.FundsService;
-import com.pillartechnology.vendingMachine.model.vendingMachineInventory.VendingMachineInventoryManager;
-import com.pillartechnology.vendingMachine.model.vendingMachineInventory.VendingMachineInventoryItem;
+import com.pillartechnology.vendingMachine.model.productInventory.ProductCode;
+import com.pillartechnology.vendingMachine.model.productInventory.ProductInventoryItem;
+import com.pillartechnology.vendingMachine.model.productInventory.ProductInventoryManager;
 import com.pillartechnology.vendingMachine.controller.productSelection.ProductSelectionManager;
 import com.pillartechnology.vendingMachine.view.VendingMachineDisplay;
 
@@ -24,8 +25,8 @@ public class ProductSelectionControllerTest {
 	private ProductSelectionManager selection;
 	private VendingMachineDisplay display;
 	private FundsService fundsService;
-	private VendingMachineInventoryManager inventory;
-	private VendingMachineInventoryItem product;
+	private ProductInventoryManager inventory;
+	private ProductInventoryItem product;
 	private ProductSelectionHandler handler;
 	private ProductSelectionLibrary library;
 	
@@ -34,8 +35,8 @@ public class ProductSelectionControllerTest {
 		selection = context.mock(ProductSelectionManager.class);
 		display = context.mock(VendingMachineDisplay.class);
 		fundsService = context.mock(FundsService.class);
-		inventory = context.mock(VendingMachineInventoryManager.class);
-		product = context.mock(VendingMachineInventoryItem.class);
+		inventory = context.mock(ProductInventoryManager.class);
+		product = context.mock(ProductInventoryItem.class);
 		library = context.mock(ProductSelectionLibrary.class);
 		handler = context.mock(ProductSelectionHandler.class);
 	}
@@ -49,6 +50,8 @@ public class ProductSelectionControllerTest {
 	public final void testMakeSelectionProductInStockPriceExceedsDeposit() {
 		final Integer input = 111;
 		final Integer productPrice = 100;
+		final String productCodeName = "CODE" + input.toString();
+		final ProductCode productCode = context.mock(ProductCode.class);
 		
 		context.checking(new Expectations() {
 			{
@@ -62,10 +65,13 @@ public class ProductSelectionControllerTest {
 				oneOf(selection).isCompleteProductCode(input); 
  					will( returnValue(true) );
  				
- 				oneOf(inventory).findProduct( with(input) );
- 					will(returnValue(product));
+				oneOf(selection).getProductCodeFrom(input); 
+					will( returnValue(productCode) );
+				
+				oneOf(inventory).findProduct( with(productCode) );
+					will( returnValue(product) );
  					
- 				oneOf(selection).isPurchasable( with(any(VendingMachineInventoryItem.class)) );
+ 				oneOf(selection).isPurchasable( with(any(ProductInventoryItem.class)) );
  					will( returnValue(true) );
  				
  				oneOf(product).productPrice();
@@ -95,6 +101,8 @@ public class ProductSelectionControllerTest {
 		final Integer input = 111;
 		final String productName = "M&Ms";
 		final Integer productPrice = 100;
+		final String productCodeName = "CODE" + input.toString();
+		final ProductCode productCode = context.mock(ProductCode.class);
 		
 		context.checking(new Expectations() {
 			{
@@ -107,11 +115,14 @@ public class ProductSelectionControllerTest {
 				
 				oneOf(selection).isCompleteProductCode(input); 
 					will( returnValue(true) );
+					
+				oneOf(selection).getProductCodeFrom(input); 
+					will( returnValue(productCode) );
 
-				oneOf(inventory).findProduct( with(input) );
+				oneOf(inventory).findProduct( with( productCode ) );
 					will(returnValue(product));
 					
-				oneOf(selection).isPurchasable( with(any(VendingMachineInventoryItem.class)) );
+				oneOf(selection).isPurchasable( with(any(ProductInventoryItem.class)) );
 					will( returnValue(true) );
 
 				oneOf(product).productPrice();
@@ -142,6 +153,8 @@ public class ProductSelectionControllerTest {
 		final Integer input = 111;
 		final String productName = "M&Ms";
 		final Integer productPrice = 100;
+		final String productCodeName = "CODE" + input.toString();
+		final ProductCode productCode = context.mock(ProductCode.class);
 		
 		context.checking(new Expectations() {
 			{
@@ -154,11 +167,14 @@ public class ProductSelectionControllerTest {
 				
 				oneOf(selection).isCompleteProductCode(input); 
 					will( returnValue(true) );
+					
+				oneOf(selection).getProductCodeFrom(input); 
+					will( returnValue(productCode) );
 				
-				oneOf(inventory).findProduct( with(input) );
-					will(returnValue(product));
+				oneOf(inventory).findProduct( with(productCode) );
+					will( returnValue(product) );
 				
-				oneOf(selection).isPurchasable( with(any(VendingMachineInventoryItem.class)) );
+				oneOf(selection).isPurchasable( with(any(ProductInventoryItem.class)) );
 					will( returnValue(true) );
 				
 				oneOf(product).productPrice();
@@ -193,6 +209,8 @@ public class ProductSelectionControllerTest {
 		final Integer input = 111;
 		final String productName = "M&Ms";
 		final Integer productPrice = 100;
+		final String productCodeName = "CODE" + input.toString();
+		final ProductCode productCode = context.mock(ProductCode.class);
 		
 		context.checking(new Expectations() {
 			{
@@ -205,11 +223,14 @@ public class ProductSelectionControllerTest {
 					
 				oneOf(selection).isCompleteProductCode(input); 
 					will( returnValue(true) );
+					
+				oneOf(selection).getProductCodeFrom(input); 
+					will( returnValue(productCode) );
 				
-				oneOf(inventory).findProduct( with(input) );
+				oneOf(inventory).findProduct( with(productCode) );
 					will(returnValue(product));
 				
-				oneOf(selection).isPurchasable( with(any(VendingMachineInventoryItem.class)) );
+				oneOf(selection).isPurchasable( with(any(ProductInventoryItem.class)) );
 					will( returnValue(true) );
 				
 				oneOf(product).productPrice();
@@ -265,6 +286,8 @@ public class ProductSelectionControllerTest {
 	@Test
 	public final void testMakeSelectionProductCodeIsComplete() {
 		final Integer input = 123;
+		final String productCodeName = "CODE" + input.toString();
+		final ProductCode productCode = context.mock(ProductCode.class);
 		
 		context.checking(new Expectations() {
 			{
@@ -278,9 +301,12 @@ public class ProductSelectionControllerTest {
 				oneOf(selection).isCompleteProductCode( with(input) );
 					will( returnValue(true) );
 					
-				oneOf(inventory).findProduct( with(input) );
+				oneOf(selection).getProductCodeFrom(input); 
+					will( returnValue(productCode) );
 					
-				oneOf(selection).isPurchasable( with(any(VendingMachineInventoryItem.class)) );
+				oneOf(inventory).findProduct( with(productCode) );
+					
+				oneOf(selection).isPurchasable( with(any(ProductInventoryItem.class)) );
 				
 				allowing(fundsService);
 				allowing(handler);
@@ -298,6 +324,8 @@ public class ProductSelectionControllerTest {
 	@Test
 	public final void testMakeSelectionProductFound() {
 		final Integer input = 111;
+		final String productCodeName = "CODE" + input.toString();
+		final ProductCode productCode = context.mock(ProductCode.class);
 		
 		context.checking(new Expectations() {
 			{
@@ -311,10 +339,13 @@ public class ProductSelectionControllerTest {
 				oneOf(selection).isCompleteProductCode(input); 
 					will( returnValue(true) );
 				
-				oneOf(inventory).findProduct( with(input) );
-					will(returnValue(product));
+				oneOf(selection).getProductCodeFrom(input); 
+					will( returnValue(productCode) );
+				
+				oneOf(inventory).findProduct( with(productCode) );
+					will( returnValue(product) );
 					
-				oneOf(selection).isPurchasable( with(any(VendingMachineInventoryItem.class)) );
+				oneOf(selection).isPurchasable( with(any(ProductInventoryItem.class)) );
 				
 				allowing(product);
 				allowing(handler);
@@ -333,6 +364,8 @@ public class ProductSelectionControllerTest {
 	@Test
 	public final void testMakeSelectionProductNotFound() {
 		final Integer input = 300;
+		final String productCodeName = "CODE" + input.toString();
+		final ProductCode productCode = context.mock(ProductCode.class);
 		
 		context.checking(new Expectations() {
 			{
@@ -345,11 +378,14 @@ public class ProductSelectionControllerTest {
 					
 				oneOf(selection).isCompleteProductCode(input); 
 					will( returnValue(true) );
+					
+				oneOf(selection).getProductCodeFrom(input); 
+					will( returnValue(productCode) );
 				
-				oneOf(inventory).findProduct( with(input) );
+				oneOf(inventory).findProduct( with(productCode) );
 					will( returnValue(null) );
 					
-				oneOf(selection).isPurchasable( with(aNull(VendingMachineInventoryItem.class)) );
+				oneOf(selection).isPurchasable( with(aNull(ProductInventoryItem.class)) );
 					//b/c product wasn't found
 					will( returnValue(false) );
 				
@@ -368,6 +404,8 @@ public class ProductSelectionControllerTest {
 	@Test
 	public final void testMakeSelectionProductOutOfStock() {
 		final Integer input = 300;
+		final String productCodeName = "CODE" + input.toString();
+		final ProductCode productCode = context.mock(ProductCode.class);
 		
 		context.checking(new Expectations() {
 			{
@@ -380,11 +418,14 @@ public class ProductSelectionControllerTest {
 					
 				oneOf(selection).isCompleteProductCode(input); 
 					will( returnValue(true) );
-				
-				oneOf(inventory).findProduct( with(input) );
-					will(returnValue(product));
 					
-				oneOf(selection).isPurchasable( with(any(VendingMachineInventoryItem.class)) );
+				oneOf(selection).getProductCodeFrom(input); 
+					will( returnValue(productCode) );
+				
+				oneOf(inventory).findProduct( with(productCode) );
+					will( returnValue(product) );
+					
+				oneOf(selection).isPurchasable( with(any(ProductInventoryItem.class)) );
 					//b/c quantity of product in inventory is 0
 					will( returnValue(false) );
 				

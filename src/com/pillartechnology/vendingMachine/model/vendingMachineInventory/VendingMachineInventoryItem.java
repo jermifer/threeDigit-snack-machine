@@ -1,11 +1,7 @@
-package com.pillartechnology.vendingMachine.model.vendingMachineInventory;
+package model.test;
 
 public interface VendingMachineInventoryItem {
-
-	public String productName();
-
-	public Integer quantityInStock();
-
-	public Integer productPrice();
-
+	String productName();
+	Integer productPrice();
+	Integer quantityInStock();
 }

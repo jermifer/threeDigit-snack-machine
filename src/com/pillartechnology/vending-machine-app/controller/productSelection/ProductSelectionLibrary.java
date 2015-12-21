@@ -1,7 +1,7 @@
 package controller.productSelection;
 
-import com.pillartechnology.vendingMachine.model.vendingMachineInventory.VendingMachineInventoryManager;
 import com.pillartechnology.vendingMachine.model.funds.FundsService;
+import com.pillartechnology.vendingMachine.model.productInventory.ProductInventoryManager;
 import com.pillartechnology.vendingMachine.controller.productSelection.ProductSelectionManager;
 import com.pillartechnology.vendingMachine.view.VendingMachineDisplay;
 
@@ -12,13 +12,13 @@ public class ProductSelectionLibrary
 	private final ProductSelectionManager selection;
 	private final VendingMachineDisplay display;
 	private final FundsService fundsService;
-	private final VendingMachineInventoryManager inventory;
+	private final ProductInventoryManager inventory;
 	
 	public ProductSelectionLibrary(
 		ProductSelectionManager selection, 
 		VendingMachineDisplay display, 
 		FundsService fundsService, 
-		VendingMachineInventoryManager inventory
+		ProductInventoryManager inventory
 	) {
 		this.display = display;
 		this.selection = selection;
@@ -38,7 +38,7 @@ public class ProductSelectionLibrary
 		return this.fundsService;
 	}
 	
-	public VendingMachineInventoryManager inventory() {
+	public ProductInventoryManager inventory() {
 		return this.inventory;
 	}
 	

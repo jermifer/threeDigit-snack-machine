@@ -1,6 +1,7 @@
 package controller.productSelection;
 
-import com.pillartechnology.vendingMachine.model.vendingMachineInventory.VendingMachineInventoryItem;
+import com.pillartechnology.vendingMachine.model.productInventory.ProductCode;
+import com.pillartechnology.vendingMachine.model.productInventory.ProductInventoryItem;
 
 public class ProductSelectionManager
 	implements  com.pillartechnology.vendingMachine.controller.productSelection.ProductSelectionManager
@@ -17,8 +18,14 @@ public class ProductSelectionManager
 	}
 
 	//product.quantityInStock() > 0
-	public boolean isPurchasable(VendingMachineInventoryItem product) {
+	public boolean isPurchasable(ProductInventoryItem product) {
 		return false;
+	}
+
+	@Override
+	public ProductCode getProductCodeFrom(Integer input) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

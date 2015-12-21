@@ -1,8 +1,11 @@
 package controller.productSelection;
 
 import com.pillartechnology.vendingMachine.model.funds.FundsService;
-import com.pillartechnology.vendingMachine.model.vendingMachineInventory.VendingMachineInventoryManager;
-import com.pillartechnology.vendingMachine.model.vendingMachineInventory.VendingMachineInventoryItem;
+import com.pillartechnology.vendingMachine.model.productInventory.ProductInventoryItem;
+import com.pillartechnology.vendingMachine.model.productInventory.ProductInventoryManager;
+
+import com.pillartechnology.vendingMachine.model.productInventory.ProductCode;
+
 import com.pillartechnology.vendingMachine.controller.productSelection.ProductSelectionHandler;
 import com.pillartechnology.vendingMachine.controller.productSelection.ProductSelectionLibrary;
 import com.pillartechnology.vendingMachine.controller.productSelection.ProductSelectionManager;
@@ -13,7 +16,7 @@ public class ProductSelectionController
 
 	private final ProductSelectionManager selection;
 	private final FundsService fundsService;
-	private final VendingMachineInventoryManager inventory;
+	private final ProductInventoryManager inventory;
 	private final ProductSelectionHandler handler;
 
 	public ProductSelectionController(
@@ -42,12 +45,13 @@ public class ProductSelectionController
 	}
 
 	public void onInput(Integer input) {
-		VendingMachineInventoryItem product;
+		ProductInventoryItem product;
 		
 		if( this.selection.isCompleteProductCode(input) ) {
+			ProductCode productCode = this.selection.getProductCodeFrom(input);
 
 			//try to find the product in the inventory
-			product = inventory.findProduct(input);
+			product = inventory.findProduct(productCode);
 			
 			//product was found and is in stock
 			if( this.selection.isPurchasable(product) ) {
