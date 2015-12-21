@@ -9,7 +9,7 @@ import com.pillartechnology.vendingMachine.model.productInventory.ProductInvento
 public class ProductInventoryManager
 	implements com.pillartechnology.vendingMachine.model.productInventory.ProductInventoryManager
 {
-	final ProductInventoryCollection products;
+	//final ProductInventoryCollection products;
 
 	public ProductInventoryManager() {
 		/*final ProductInventoryService service = new ProductInventoryService();
@@ -18,7 +18,7 @@ public class ProductInventoryManager
 
 	@Override
 	public ProductInventoryItem findProduct(ProductCode productCode) {
-		return this.products.get(productCode);
+		//return (new ProductInventoryItem());
 	}
 
 }

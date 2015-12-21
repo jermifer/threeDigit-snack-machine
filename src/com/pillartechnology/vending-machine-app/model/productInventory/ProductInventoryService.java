@@ -5,10 +5,10 @@ import com.pillartechnology.vendingMachine.model.productInventory.ProductInvento
 import com.pillartechnology.vendingMachine.model.productInventory.ProductInventoryItem;
 
 public class ProductInventoryService
-		implements model.test.ProductInventoryService {
+		implements com.pillartechnology.vendingMachine.model.productInventory.ProductInventoryService {
 
 	@Override
-	ProductInventoryCollection<ProductCode, ProductInventoryItem> getCatalogByProductCode(ProductCode productCode) {
+	public ProductInventoryCollection<ProductCode, ProductInventoryItem> getCatalogByProductCode(ProductCode productCode) {
 		// TODO Auto-generated method stub
 		return null;
 	}
